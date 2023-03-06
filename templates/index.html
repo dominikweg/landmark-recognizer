@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landmark Recognizer</title>
+
+    <link rel="stylesheet" href="../static/style.css">
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+</head>
+<body>
+    <div id="mask"></div>
+    <div class="container py-5 mt-5 narrow-pill">
+        <header class="text-center">
+            <h1 class="display-4">Landmark Recognizer</h1>
+            <p class="lead mb-0">Did you found a photo of a beatufiul place and you don't know where it is or what it is ?<br>This AI powered app is here to help you !</p>
+            <img src="../static/resources/ai_icon.svg" width="150" class="mt-5 mb-4 pad">
+        </header>
+        <div class="row py-4">
+            
+            <div class="col-lg-6 mx-auto center">
+
+                <form class="input-form" id="myForm" action="/upload" method="post">
+                    <div class="input-group mb-3 rounded-pill shadow-lg bg-white">   
+                        <input id="upload" type="file" onchange="readURL(this);" class="form-control border-0">
+                        <label id="upload-label" for="upload" class="font-weight-light text-muted">To choose a file click or drag the file here...</label>
+                    </div>
+
+                    <div class="image-area mt-4"><img id="imageResult" alt=""
+                            class="img-fluid rounded shadow-sm mx-auto d-block" width="224"></div>
+
+                    <button id="submit-btn" class="pill-btn pad" type="submit">Upload</button>
+                </form>
+                <p class="font-italic text-center pad">AI Prediction:</p>
+                <div class="mb-3 rounded-pill shadow-lg bg-white">
+                    <p class="font-italic" style="margin: 0; visibility: hidden; text-align: center;" id="result"><img src="../static/resources/loading.svg" alt="" style="width: 35px;background: white; border-radius: 51%; "> Photo Uploaded...Processing...</p>
+                </div>
+                
+                <p class="font-italic text-center pad">Location of Predicted Place:</p>
+                <div class="pad">
+                    <div id="map"></div>
+                </div>
+
+                <div class="pad" id="report-container" style="visibility: hidden;">
+                    <h5>You think our AI might be wrong ? You can send us report to help improve our AI !</h5>
+                    <button id="report-btn" class="pill-btn pad" onclick="openForm()">Report</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div class="popup">
+        <div class="popup-form" id="popupForm">
+            <form class="report-form" id="reportForm" action="/report" method="post">
+                <h3>Report</h3>
+                <p>If you know please enter the name of this place, if not don't worry just press Send!</p>
+                <input type="text" name="class" id="class" placeholder="Unknown place">
+                <button class="btn" type="submit" id="send-btn" onclick="closeForm()">Send</button>
+                <button class="btn cancel" type="button" id="close-btn" onclick="closeForm()">Close</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBy_Y6TUwzyYnaRFunPJYjLCYF3z4rVwMs&callback=initMap" defer></script>
+    <script src="../static/app.js"></script>
+</body>
+</html>
